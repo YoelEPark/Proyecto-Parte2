@@ -1,5 +1,5 @@
-import React from "react"; 
-import Home from "./src/screens/home";
+import React from 'react'; 
+import Home from './src/screens/home';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer'; 
 import Login from './src/screens/login';
