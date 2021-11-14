@@ -1,11 +1,26 @@
 import React from "react";
-import  {  Text, View } from "react-native";
+import  {  Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 
 
-export default function Registro() {
+export default class registro extends Component {
+  constructor(props){
+     super(props);
+     this.state = {
+       email: "",
+       password: ""
+     }
+  }
+
+handleRegister() {
+  alert (`Registo: usuario: ${this.state.email}, password: ${this.state.password}´)
+
+}
+
+  render(){  
   return (
     <View >
         <Text> funciona???? </Text>
     </View>
   );
+   }
 }
