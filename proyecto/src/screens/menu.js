@@ -23,10 +23,10 @@ export default class menu extends Component {
 
 
     
-            registroNuevo(email, password) {
+            registroNuevo(email, password, username) {
                 auth.createUserWithEmailAndPassword(email, password)
-                .then (responce => {
-                  console.log(responce);
+                .then (response => {
+                  console.log(response);
                   alert("Usuario Registrado!!!")
                   this.setState({
                     logueado: true
@@ -59,13 +59,27 @@ export default class menu extends Component {
                 })
             }
 
+            deslogueo(){
+                auth.signOut()
+                .then(()=> {
+                    this.setState({
+                        logueado: false
+                    })
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+            }
+
     render(){
           const Drawer = createDrawerNavigator();
          return (
           <NavigationContainer>
                 <Drawer.Navigator>
                     {this.state.logueado === true ?
-                     <Drawer.Screen name="Home" component={()=> <Home/> }/>
+                     <Drawer.Screen name = "Home">
+                     {props => <Home {...props} deslogueo={()=>this.deslogueo()}/>}
+                 </Drawer.Screen>
                         :
                         <>
                    
@@ -77,7 +91,7 @@ export default class menu extends Component {
                   <Drawer.Screen name="MiPerfil" component={()=> <MiPerfil/> }/>
 
                   <Drawer.Screen name = "Registro">
-                                {props => <Registro {...props} registroNuevo={(email, password)=>this.registroNuevo(email, password)}/>}
+                                {props => <Registro {...props} registroNuevo={(email, password)=>this.registroNuevo(email, password, username)}/>}
                              </Drawer.Screen>
                             </>
                             }
