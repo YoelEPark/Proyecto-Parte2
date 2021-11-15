@@ -7,32 +7,13 @@ export default class login extends Component {
         super(props);
         this.state = {
             email: "",
-            password: "",
-            logueado: false,
-            error: ""
+            password: ""
         }
     }
 
-    logueoNuevo() {
-        auth.signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then( response => {
-            console.log(response);
-            alert("Usuario logeado!!!");
-            this.setState({
-                logueado: true
-            })
-        })
-        .catch( response => {
-            console.log(response);
-            alert("Error en el logeo");
-            this.setState({
-                error: "Error en logeo :("
-            })
-        })
-    }
+   
 
     render() {
-        console.log(this.state.logueado);
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>Login</Text>
@@ -49,7 +30,7 @@ export default class login extends Component {
                     secureTextEntry={true}
                     onChangeText={text => this.setState({ password: text })}
                 />
-                <TouchableOpacity style = {styles.button} onPress={() => this.logueoNuevo()}>
+                <TouchableOpacity style = {styles.button} onPress={() => this.props.logueoNuevo(this.state.email, this.state.password)}>
                     <Text style = {styles.text}> Login </Text>
                 </TouchableOpacity>
             </View>

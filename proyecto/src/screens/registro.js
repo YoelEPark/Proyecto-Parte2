@@ -7,29 +7,11 @@ export default class registro extends Component {
      super(props);
      this.state = {
        email: "",
-       password: "",
-       logueado: false,
-       error: ""
+       password: ""
      }
   }
 
-registroNuevo() {
-  auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
-  .then (responce => {
-    console.log(responce);
-    alert("Usuario Registrado!!!")
-    this.setState({
-      logueado: true
-    })
-  } )
-.catch( error => {
-  console.log(error);
-  alert("Ocurrio un error")
-  this.setState({
-    error: "Fallo en el registro"
-  })
-})
-}
+
 
   render(){  
   return (
@@ -47,7 +29,7 @@ registroNuevo() {
           keyboardType="default"
           onChangeText={text => this.setState({password: text})}
           />
-          <TouchableOpacity style = {styles.button} onPress={() => this.registroNuevo()}>
+          <TouchableOpacity style = {styles.button} onPress={() => this.props.registroNuevo(this.state.email, this.state.password)}>
             <Text style={styles.text}> Sign Up  </Text>
           </TouchableOpacity>
     </View>
