@@ -20,14 +20,25 @@ export default class menu extends Component {
         }
     }
  
-
+    componentDidMount(){
+        auth.onAuthStateChanged( user => {
+            if (user) {
+                this.setState({
+                    logueado: true
+                })
+            }
+        })
+    }
 
     
             registroNuevo(email, password, username) {
                 auth.createUserWithEmailAndPassword(email, password)
                 .then (response => {
                   console.log(response);
-                  alert("Usuario Registrado!!!")
+                  alert("Usuario Registrado!!!");
+                  response.user.updateProfile({
+                      displayName: username
+                  })
                   this.setState({
                     logueado: true
                   })
@@ -91,7 +102,7 @@ export default class menu extends Component {
                   <Drawer.Screen name="MiPerfil" component={()=> <MiPerfil/> }/>
 
                   <Drawer.Screen name = "Registro">
-                                {props => <Registro {...props} registroNuevo={(email, password)=>this.registroNuevo(email, password, username)}/>}
+                                {props => <Registro {...props} registroNuevo={(email, password, username)=>this.registroNuevo(email, password, username)}/>}
                              </Drawer.Screen>
                             </>
                             }

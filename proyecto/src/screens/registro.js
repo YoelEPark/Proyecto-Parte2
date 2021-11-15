@@ -34,6 +34,7 @@ export default class registro extends Component {
           style={styles.field}
           placeholder="password"
           keyboardType="default"
+          secureTextEntry={true}
           onChangeText={text => this.setState({password: text})}
           />
           <TouchableOpacity style = {styles.button} onPress={() => this.props.registroNuevo(this.state.email, this.state.password, this.state.username)}>
