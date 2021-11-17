@@ -6,6 +6,7 @@ import Login from './login';
 import MiPerfil from './miperfil';
 import Registro from './registro';
 import { auth } from '../firebase/config';
+import CrearPosteo from './crearPosteo';
 
 
 
@@ -88,9 +89,15 @@ export default class menu extends Component {
           <NavigationContainer>
                 <Drawer.Navigator>
                     {this.state.logueado === true ?
+                    <>
                      <Drawer.Screen name = "Home">
                      {props => <Home {...props} deslogueo={()=>this.deslogueo()}/>}
                  </Drawer.Screen>
+                 <Drawer.Screen name ="Crear Posteo">
+                 {props => <CrearPosteo {...props} />}
+                     </Drawer.Screen>
+                 <Drawer.Screen name="Mi Perfil" component={()=> <MiPerfil/> }/>
+                    </>
                         :
                         <>
                    
@@ -99,8 +106,7 @@ export default class menu extends Component {
                   </Drawer.Screen>
                             
 
-                  <Drawer.Screen name="MiPerfil" component={()=> <MiPerfil/> }/>
-
+                  
                   <Drawer.Screen name = "Registro">
                                 {props => <Registro {...props} registroNuevo={(email, password, username)=>this.registroNuevo(email, password, username)}/>}
                              </Drawer.Screen>
