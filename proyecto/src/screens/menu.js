@@ -44,14 +44,10 @@ export default class menu extends Component {
                     logueado: true
                   })
                 } )
-              .catch( error => {
-                console.log(error);
-                alert("Ocurrio un error")
-                this.setState({
-                  error: "Fallo en el registro"
-                })
-              })
-              } 
+               .catch(error => {
+                    alert(error.message);
+                 })
+           }  
 
             logueoNuevo(email, password) {
                 auth.signInWithEmailAndPassword(email, password)
