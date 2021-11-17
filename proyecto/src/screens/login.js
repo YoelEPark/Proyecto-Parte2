@@ -45,17 +45,18 @@ const styles = StyleSheet.create({
   },
   field: {
       width: '80%',
-      backgroundColor: "yellow",
-      color: 'blue',
+      backgroundColor: "#2DFF95",
+      color: '#000000',
       padding: 10,
       marginVertical: 10
   },
   button: {
       width: '30%',
-      backgroundColor: "green",
+      backgroundColor: "#FF712D",
   },
   text: {
-      color: 'blue',
-      fontSize: 20
+      color: '#000000',
+      fontSize: 20,
+      textAlign: 'center'
   }
 })

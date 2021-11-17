@@ -9,7 +9,6 @@ export default class Home extends Component {
 render(){ 
   return (
     <View >
-        <Text> funciona? </Text>
         <TouchableOpacity style = {styles.button} onPress={() => this.props.deslogueo()}>
                     <Text style = {styles.text}> Logout </Text>
                 </TouchableOpacity>
@@ -21,10 +20,11 @@ const styles = StyleSheet.create({
   
   button: {
       width: '30%',
-      backgroundColor: "green",
+      backgroundColor: "#FF712D",
   },
   text: {
-      color: 'yellow',
-      fontSize: 20
+      color: '#000000',
+      fontSize: 20,
+      textAlign: 'center'
   }
 }) 

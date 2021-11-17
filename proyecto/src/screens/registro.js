@@ -53,23 +53,24 @@ registroNuevo(){
   }
 
   const styles = StyleSheet.create({
-      container: {
-          flex: 1,
-          alignItems: 'center'
-      },
-      field: {
-          width: '80%',
-          backgroundColor: "yellow",
-          color: 'blue',
-          padding: 10,
-          marginVertical: 10
-      },
-      button: {
-          width: '30%',
-          backgroundColor: "green",
-      },
-      text: {
-          color: 'blue',
-          fontSize: 20
-      }
+    container: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    field: {
+        width: '80%',
+        backgroundColor: "#2DFF95",
+        color: '#000000',
+        padding: 10,
+        marginVertical: 10
+    },
+    button: {
+        width: '30%',
+        backgroundColor: "#FF712D",
+    },
+    text: {
+        color: '#000000',
+        fontSize: 20,
+        textAlign: 'center'
+    }
   })

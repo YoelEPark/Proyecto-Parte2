@@ -10,8 +10,8 @@ export default class crearPosteo extends Component {
         }
     }
 
-    handlePost(){
-        db.collection('posts').add({
+    posteoNuevo(){
+        db.collection('posteos').add({
             owner: auth.currentUser.displayName,
             description: this.state.comment,
             createdAt: Date.now()
@@ -38,14 +38,14 @@ export default class crearPosteo extends Component {
                 <TextInput
                     style={styles.field}
                     keyboardType='default'
-                    placeholder="What are you thinking?"
+                    placeholder="Ingresa aqui lo que desees postear"
                     multiline={true}
                     numberOfLines = {4}
                     onChangeText={text => this.setState({ comment: text })}
                     value = {this.state.comment}
                 />
-                <TouchableOpacity style = {styles.button} onPress={() => this.handlePost()}>
-                    <Text style = {styles.text}> Post </Text>
+                <TouchableOpacity style = {styles.button} onPress={() => this.posteoNuevo()}>
+                    <Text style = {styles.text}> Postear </Text>
                 </TouchableOpacity>
             </View>
         )
@@ -58,17 +58,18 @@ const styles = StyleSheet.create({
     },
     field: {
         width: '80%',
-        backgroundColor: "#09009B",
-        color: '#FFA400',
+        backgroundColor: "#2DFF95",
+        color: '#FF712D',
         padding: 10,
         marginVertical: 10
     },
     button: {
         width: '30%',
-        backgroundColor: "#0F00FF",
+        backgroundColor: "#FF712D",
     },
     text: {
-        color: '#FFA400',
-        fontSize: 20
+        color: '#000000',
+        fontSize: 20,
+        textAlign: 'center'
     }
 })
