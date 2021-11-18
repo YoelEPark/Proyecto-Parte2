@@ -14,7 +14,10 @@ export default class crearPosteo extends Component {
         db.collection('posteos').add({
             owner: auth.currentUser.displayName,
             description: this.state.comment,
-            createdAt: Date.now()
+            email: auth.currentUser.email,
+            createdAt: Date.now(),
+            likes: [],
+            comments: []
         })
         .then(response => {
             console.log(response);
@@ -22,7 +25,6 @@ export default class crearPosteo extends Component {
             this.setState({
                 comment: ""
             })
-            console.log(this.props);
             this.props.navigation.navigate('Home');
         })
         .catch(error => {
