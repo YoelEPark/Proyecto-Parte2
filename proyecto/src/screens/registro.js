@@ -12,12 +12,12 @@ export default class registro extends Component {
        campos: ""
      }
   }
-
+  
 registroNuevo(){
   if (this.state.email !== "" && this.state.password !== "" && this.state.username != "") {
     this.props.registroNuevo(this.state.email, this.state.password, this.state.username)
   }
-  else (this.setState({campos: "falta rellenar este campo"}))
+  else (this.setState({campos: "Falta rellenar algun campo"})); console.log(this.props);
 }
 
   render(){  
@@ -30,7 +30,7 @@ registroNuevo(){
           keyboardType="default"
           onChangeText={text => this.setState({username: text})}
           />
-          <Text> {this.state.campos} </Text>
+        
         <TextInput
           style={styles.field}
           placeholder="email"
@@ -43,7 +43,8 @@ registroNuevo(){
           keyboardType="default"
           secureTextEntry={true}
           onChangeText={text => this.setState({password: text})}
-          />
+          /> 
+            <Text> {this.state.campos} </Text>  <Text> {this.props.error} </Text>
           <TouchableOpacity style = {styles.button} onPress={() => this.registroNuevo()}>
             <Text style={styles.text}> Sign Up  </Text>
           </TouchableOpacity>

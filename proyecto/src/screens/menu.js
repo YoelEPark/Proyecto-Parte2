@@ -17,6 +17,8 @@ export default class menu extends Component {
         this.state = {
             logueado: false,
             error: null,
+            mensaje: "",
+            mensajes: ""
 
         }
     }
@@ -44,10 +46,10 @@ export default class menu extends Component {
                     logueado: true
                   })
                 } )
-               .catch(error => {
-                    alert(error.message);
-                 })
-           }  
+               .catch(error => {  
+                    this.setState({
+                        mensaje: error.message});
+               }) }
 
             logueoNuevo(email, password) {
                 auth.signInWithEmailAndPassword(email, password)
@@ -58,11 +60,9 @@ export default class menu extends Component {
                         logueado: true
                     })
                 })
-                .catch( response => {
-                    console.log(response);
-                    alert("Error en el logeo");
+                .catch( error => {
                     this.setState({
-                        error: "Error en logeo :("
+                        mensajes: error.message
                     })
                 })
             }
@@ -98,13 +98,13 @@ export default class menu extends Component {
                         <>
                    
                   <Drawer.Screen name="Login">
-                                {props => <Login {...props} logueoNuevo={(email, password)=>this.logueoNuevo(email, password)}/>}
+                                {props => <Login {...props} logueoNuevo={(email, password)=>this.logueoNuevo(email, password)} falla= {this.state.mensajes}/>}
                   </Drawer.Screen>
                             
 
                   
                   <Drawer.Screen name = "Registro">
-                                {props => <Registro {...props} registroNuevo={(email, password, username)=>this.registroNuevo(email, password, username)}/>}
+                                {props => <Registro {...props} registroNuevo={(email, password, username)=>this.registroNuevo(email, password, username)} error= {this.state.mensaje} />}
                              </Drawer.Screen>
                             </>
                             }

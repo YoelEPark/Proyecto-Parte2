@@ -7,11 +7,17 @@ export default class login extends Component {
         super(props);
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            campos: ""
         }
     }
 
-   
+   logueoNuevo(){
+        if (this.state.email !== "" && this.state.password !== "") {
+          this.props.logueoNuevo(this.state.email, this.state.password)
+        }
+        else (this.setState({campos: "Falta rellenar algun campo"})); 
+      }
 
     render() {
         return (
@@ -30,7 +36,9 @@ export default class login extends Component {
                     secureTextEntry={true}
                     onChangeText={text => this.setState({ password: text })}
                 />
-                <TouchableOpacity style = {styles.button} onPress={() => this.props.logueoNuevo(this.state.email, this.state.password)}>
+                 <Text> {this.state.campos} </Text>
+                 <Text> {this.props.falla} </Text>
+                <TouchableOpacity style = {styles.button} onPress={() => this.logueoNuevo()}>
                     <Text style = {styles.text}> Login </Text>
                 </TouchableOpacity>
             </View>
