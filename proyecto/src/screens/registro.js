@@ -44,7 +44,8 @@ registroNuevo(){
           secureTextEntry={true}
           onChangeText={text => this.setState({password: text})}
           /> 
-            <Text> {this.state.campos} </Text>  <Text> {this.props.error} </Text>
+            <Text> {this.state.campos} </Text> 
+             <Text> {this.props.error} </Text>
           <TouchableOpacity style = {styles.button} onPress={() => this.registroNuevo()}>
             <Text style={styles.text}> Sign Up  </Text>
           </TouchableOpacity>

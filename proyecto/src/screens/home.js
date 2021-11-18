@@ -15,7 +15,7 @@ export default class Home extends Component {
   componentDidMount(){
     db.collection('posteos').orderBy("createdAt", "desc").onSnapshot(
         docs => {
-            let postsAux = [] //Variable auxiliar
+            let postsAux = [] 
             docs.forEach( doc => {
                 postsAux.push({
                     id: doc.id,
