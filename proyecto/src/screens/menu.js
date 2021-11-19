@@ -86,13 +86,15 @@ export default class menu extends Component {
                 <Drawer.Navigator>
                     {this.state.logueado === true ?
                     <>
-                     <Drawer.Screen name = "Home">
-                     {props => <Home {...props} deslogueo={()=>this.deslogueo()}/>}
-                 </Drawer.Screen>
+                     <Drawer.Screen name = "Home" component={()=> <Home/> }/>
+                    
                  <Drawer.Screen name ="Crear Posteo">
                  {props => <CrearPosteo {...props} />}
                      </Drawer.Screen>
-                 <Drawer.Screen name="Mi Perfil" component={()=> <MiPerfil/> }/>
+                     <Drawer.Screen name="Mi Perfil"  >
+                 {props => <MiPerfil {...props} deslogueo={()=>this.deslogueo()}/>}
+                 </Drawer.Screen>
+
                     </>
                         :
                         <>
@@ -100,8 +102,7 @@ export default class menu extends Component {
                   <Drawer.Screen name="Login">
                                 {props => <Login {...props} logueoNuevo={(email, password)=>this.logueoNuevo(email, password)} falla= {this.state.mensajes}/>}
                   </Drawer.Screen>
-                            
-
+                  
                   
                   <Drawer.Screen name = "Registro">
                                 {props => <Registro {...props} registroNuevo={(email, password, username)=>this.registroNuevo(email, password, username)} error= {this.state.mensaje} />}

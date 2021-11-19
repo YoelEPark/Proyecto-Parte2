@@ -4,11 +4,11 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { auth, db } from "../firebase/config";
 import Post from "../components/posteos";
 
-export default class Home extends Component {
+export default class miperfil extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],
+      posteos: [],
     };
   } 
 
@@ -26,7 +26,7 @@ export default class Home extends Component {
             });
           }); 
           this.setState({
-            posts: postsAux,
+            posteos: postsAux,
           });
         } 
       ); 
@@ -34,7 +34,7 @@ export default class Home extends Component {
 
   verData() {
     console.log(auth.currentUser);
-    console.log(this.state.posts);
+    console.log(this.state.posteos);
   }
 
   render() {
@@ -48,18 +48,18 @@ export default class Home extends Component {
         <Text>
           Última fecha de ingreso: {auth.currentUser.metadata.lastSignInTime}
         </Text>
-        <Text>Publicaciones: {this.state.posts.length}</Text>{" "}
+        <Text>Publicaciones: {this.state.posteos.length}</Text>{" "}
         {/* AGREGAR CANTIDAD DE POSTEOS */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => this.props.handleLogout()}
+          onPress={() => this.props.deslogueo()}
         >
           <Text style={styles.text}> Cerrar sesión </Text>
         </TouchableOpacity>
         <FlatList
-          data={this.state.posts}
+          data={this.state.posteos}
           keyExtractor={(post) => post.id.toString()}
-          renderItem={({ item }) => <Post dataItem={item}></Post>}
+          renderItem={({ item }) => <Post item={item}></Post>}
         />
       </View>
     );

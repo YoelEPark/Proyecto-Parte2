@@ -15,8 +15,8 @@ export default class Posteos extends Component{
 
 
         componentDidMount(){
-            if (this.props.dataItem){
-            if (this.props.item.likes.lenght !== 0){
+            if (this.props.item){
+            if (this.props.item.data.likes.lenght !== 0){
                 this.setState({
                     likes: this.props.item.data.likes.lenght
                 })

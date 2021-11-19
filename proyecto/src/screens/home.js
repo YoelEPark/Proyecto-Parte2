@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import  {  Text, View, StyleSheet, TouchableOpacity, FlatList } from "react-native";
+import  {  Text, View, StyleSheet,  FlatList } from "react-native";
 import Posteos from '../components/posteos';
 import { db } from '../firebase/config';
 
@@ -31,14 +31,11 @@ export default class Home extends Component {
 render(){ 
   return (
     <View >
-        <TouchableOpacity style = {styles.button} onPress={() => this.props.deslogueo()}>
-                    <Text style = {styles.text}> Logout </Text>
-                </TouchableOpacity>
-               
-                <FlatList
-                data = {this.state.posteos}
-                keyExtractor = {posteos => posteos.id.toString()}
-                renderItem = { ({item}) => 
+            
+            <FlatList
+               data = {this.state.posteos}
+               keyExtractor = {posteos => posteos.id.toString()}
+              renderItem = { ({item}) => 
                     <Posteos item = {item}></Posteos> }
                 />
     </View>
