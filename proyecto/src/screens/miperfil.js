@@ -10,7 +10,7 @@ export default class Home extends Component {
     this.state = {
       posts: [],
     };
-  } // Constructor
+  } 
 
   componentDidMount() {
     db.collection("posteos")
