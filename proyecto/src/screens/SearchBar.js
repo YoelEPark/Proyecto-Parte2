@@ -11,22 +11,21 @@ export default class SearchBar extends Component {
       search:""
   }
   }
- Busqueda(){
-     this.setState({posts: [] })
-    db.collection('posts').orderBy("createdAt", "desc").where("owner","==",this.state.search).onSnapshot( 
-        docs => {
-            let postsAux = [] 
-            docs.forEach( doc => {
-                postsAux.push({
-                    id: doc.id,
-                    data: doc.data()
-                })
+  Busqueda(text){
+    db.collection('posts').where('owner','==', text).get().then(docs => {
+        let posts=[];
+        docs.forEach(doc => {
+            posts.push({
+                id: doc.id,
+                data: doc.data()
+
             })
-            this.setState({
-                posts: postsAux
-            })
-        }
-    )
+        })
+        this.setState({
+            posts: posts,
+            search: text
+        })
+    })  
 }
  
 
@@ -37,7 +36,7 @@ export default class SearchBar extends Component {
            style={styles.field}
            keyboardType='default'
            placeholder="Buscar"  
-           onChangeText={text => this.setState({ search: text },this.Busqueda)}
+           onChangeText  = { (text) => this.Busqueda(text)}
            value= {this.state.search}   />
               <FlatList
                  data = {this.state.posts}
