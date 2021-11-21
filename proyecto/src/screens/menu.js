@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer'; 
-import Home from './home';
-import Login from './login';
-import MiPerfil from './miperfil';
-import Registro from './registro';
+import Home from './Home';
+import Login from './Login';
+import MiPerfil from './MiPerfil';
+import Registro from './Registro';
 import { auth } from '../firebase/config';
-import CrearPosteo from './crearPosteo';
+import CrearPosteo from './CrearPosteo';
 
 
 
 
-export default class menu extends Component {
+export default class Menu extends Component {
     constructor(props){
         super(props);
         this.state = {

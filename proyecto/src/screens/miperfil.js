@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { auth, db } from "../firebase/config";
-import Post from "../components/posteos";
+import Posteos from "../components/Posteos";
 
-export default class miperfil extends Component {
+export default class MiPerfil extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posteos: [],
+      posts: [],
     };
   } 
 
   componentDidMount() {
-    db.collection("posteos")
+    db.collection("posts")
       .where("owner", "==", auth.currentUser.displayName)
       .orderBy("createdAt", "desc")
       .onSnapshot(
@@ -26,7 +26,7 @@ export default class miperfil extends Component {
             });
           }); 
           this.setState({
-            posteos: postsAux,
+            posts: postsAux,
           });
         } 
       ); 
@@ -34,7 +34,7 @@ export default class miperfil extends Component {
 
   verData() {
     console.log(auth.currentUser);
-    console.log(this.state.posteos);
+    console.log(this.state.posts);
   }
 
   render() {
@@ -48,8 +48,7 @@ export default class miperfil extends Component {
         <Text>
           Última fecha de ingreso: {auth.currentUser.metadata.lastSignInTime}
         </Text>
-        <Text>Publicaciones: {this.state.posteos.length}</Text>{" "}
-        {/* AGREGAR CANTIDAD DE POSTEOS */}
+        <Text>Publicaciones: {this.state.posts.length}</Text>{" "} 
         <TouchableOpacity
           style={styles.button}
           onPress={() => this.props.deslogueo()}
@@ -57,12 +56,12 @@ export default class miperfil extends Component {
           <Text style={styles.text}> Cerrar sesión </Text>
         </TouchableOpacity>
         <FlatList
-          data={this.state.posteos}
-          keyExtractor={(post) => post.id.toString()}
-          renderItem={({ item }) => <Post item={item}></Post>}
+          data={this.state.posts}
+          keyExtractor={(posts) => posts.id.toString()}
+          renderItem={({ item }) => <Posteos item={item}></Posteos>}
         />
       </View>
-    );
+    )
   }
 }
 

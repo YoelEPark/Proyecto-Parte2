@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import  {  Text, View, StyleSheet,  FlatList } from "react-native";
-import Posteos from '../components/posteos';
+import Posteos from '../components/Posteos';
 import { db } from '../firebase/config';
 
 export default class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      posteos: []
+      posts: []
   }
   }
 
 
   componentDidMount(){
-    db.collection('posteos').orderBy("createdAt", "desc").onSnapshot(
+    db.collection('posts').orderBy("createdAt", "desc").onSnapshot(
         docs => {
             let postsAux = [] 
             docs.forEach( doc => {
@@ -23,7 +23,7 @@ export default class Home extends Component {
                 })
             })
             this.setState({
-                posteos: postsAux
+                posts: postsAux
             })
         }
     )
@@ -33,8 +33,8 @@ render(){
     <View >
             
             <FlatList
-               data = {this.state.posteos}
-               keyExtractor = {posteos => posteos.id.toString()}
+               data = {this.state.posts}
+               keyExtractor = {posts => posts.id.toString()}
               renderItem = { ({item}) => 
                     <Posteos item = {item}></Posteos> }
                 />

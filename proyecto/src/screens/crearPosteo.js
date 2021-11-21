@@ -1,23 +1,27 @@
 import React, {Component} from 'react';
-import { Text, TextInput, TouchableOpacity, View, StyleSheet} from 'react-native';
+import { Text, TextInput, TouchableOpacity, View, StyleSheet, Image} from 'react-native';
 import { auth, db } from '../firebase/config';
+import MyCamera from '../components/MyCamera';
 
 export default class crearPosteo extends Component {
     constructor(props){
         super(props);
         this.state = {
-            comment: ""
+            comment: "",
+            photo: '',
+            showCamera: true,
         }
     }
 
     posteoNuevo(){
-        db.collection('posteos').add({
+        db.collection('posts').add({
             owner: auth.currentUser.displayName,
             description: this.state.comment,
             email: auth.currentUser.email,
             createdAt: Date.now(),
             likes: [],
-            comments: []
+            comments: [],
+            photo: this.state.photo
         })
         .then(response => {
             console.log(response);
@@ -32,11 +36,27 @@ export default class crearPosteo extends Component {
             alert("Hubo un error");
         })
     }
+
+    guardarFoto(url){
+        this.setState({
+            photo: url,
+            showCamera: false,
+        })
+    }
     
     render(){
         
         return(
+            <>
+            {this.state.showCamera ? 
+            <MyCamera savePhoto = {(url)=>this.guardarFoto(url)}/>
+            :
+            <>
             <View style={styles.container}>
+                <Image
+                    source ={{uri: this.state.photo}}
+                    style = {styles.imagen}
+                />
                 <TextInput
                     style={styles.field}
                     keyboardType='default'
@@ -50,6 +70,9 @@ export default class crearPosteo extends Component {
                     <Text style = {styles.text}> Postear </Text>
                 </TouchableOpacity>
             </View>
+            </>
+            }
+            </>
         )
     }
 }
@@ -73,5 +96,9 @@ const styles = StyleSheet.create({
         color: '#000000',
         fontSize: 20,
         textAlign: 'center'
+    },
+    imagen: {
+        height: 300,
+        width: '90%'
     }
 })

@@ -12,7 +12,7 @@ export default class Comments extends Component{
     }
 
     onComment(){
-        const posteoActualizar = db.collection("posteos").doc(this.props.postId);
+        const posteoActualizar = db.collection("posts").doc(this.props.postId);
         if(this.state.comment == ""){
             alert('Escriba un comentario')
         } else{
