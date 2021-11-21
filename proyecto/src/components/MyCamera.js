@@ -3,10 +3,10 @@ import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { storage } from '../firebase/config';
 
-export default class MyCamera extends React.Component {
+export default class MyCamera extends React.Component{
     constructor(props){
         super(props);
-        this.camera; 
+        this.camera; //Variable vacía
         this.state = {
             photo: '',
             permission: false,
@@ -18,11 +18,10 @@ export default class MyCamera extends React.Component {
         .then(response => {
             console.log(response)
             this.setState({
-                permission: response.granted
+            permission: response.granted
             })
         })
     }
-
 
     takePicture(){
         if(!this.camera) return;
@@ -37,23 +36,23 @@ export default class MyCamera extends React.Component {
 
     uploadImage(){
         fetch(this.state.photo)
-        .then(res =>{
-            return res.blob();  
+        .then(res => {
+            return res.blob();
         })
         .then(image => {
+            //console.log(image);
             const ref = storage.ref(`camera/${Date.now()}.jpg`)
             ref.put(image)
-            .then(() =>{
+            .then(()=>{                
                 ref.getDownloadURL()
-                .then(url =>{
+                .then(url => {
                     console.log(url);
                     this.setState({
                         photo: ''
                     })
                     this.props.savePhoto(url);
-                })   
+                })
             })
-
         })
     }
 
@@ -95,7 +94,7 @@ export default class MyCamera extends React.Component {
             
                 ref = {referencia => this.camera = referencia}
             >
-              
+                {/* Ref hace referencia al objeto Camera, para luego utilizar sus métodos */}
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={styles.button}
@@ -169,6 +168,4 @@ export const styles = StyleSheet.create({
         borderRadius: 50
     }
 })
-
-
 

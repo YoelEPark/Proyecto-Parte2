@@ -111,7 +111,7 @@ quitarLikeado(){
                         style = {styles.modal}
                         >
                             <View style={styles.modalView}>
-                                {/* Botón de cierre del modal */}
+                              
                                 <TouchableOpacity style={styles.closeModal} onPress={()=>{this.closeModal()}}>
                                         <Text style={styles.modalText} >X</Text>
                                 </TouchableOpacity>
