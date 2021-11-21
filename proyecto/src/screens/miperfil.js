@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import  {  Text, View, StyleSheet,  FlatList, Image, TouchableOpacity } from "react-native";
 import { auth, db } from "../firebase/config";
 import Posteos from "../components/Posteos";
 
@@ -9,7 +8,7 @@ export default class MiPerfil extends Component {
     super(props);
     this.state = {
       posts: [],
-    };
+    }
   } 
 
   componentDidMount() {
@@ -23,26 +22,19 @@ export default class MiPerfil extends Component {
             postsAux.push({
               id: doc.id,
               data: doc.data(),
-            });
-          }); 
+            })
+          })
           this.setState({
             posts: postsAux,
-          });
+          })
         } 
-      ); 
+      )
   } 
-
-  verData() {
-    console.log(auth.currentUser);
-    console.log(this.state.posts);
-  }
+ 
 
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={() => this.verData()}>
-        <Text style={styles.text}> ver data en consola </Text>
-        </TouchableOpacity>
         <Text>Usuario: {auth.currentUser.displayName}</Text>
         <Text>E-mail: {auth.currentUser.email}</Text>
         <Text>
@@ -58,7 +50,7 @@ export default class MiPerfil extends Component {
         <FlatList
           data={this.state.posts}
           keyExtractor={(posts) => posts.id.toString()}
-          renderItem={({ item }) => <Posteos item={item}></Posteos>}
+          renderItem = { ({item}) => {return <Posteos item = {item}></Posteos> }  }
         />
       </View>
     )
