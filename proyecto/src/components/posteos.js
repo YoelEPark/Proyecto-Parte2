@@ -23,7 +23,7 @@ export default class Posteos extends Component{
                 })
                 if (this.props.item.data.likes.includes(auth.currentUser.email)){
                     this.setState({
-                        liked: true
+                        likeado: true
                     })
                 } } }
     }
@@ -75,10 +75,15 @@ quitarLikeado(){
     }
    
     render(){
+        console.log(this.props.item);
     return(
         <View stlye={styles.container}>
+            <Image 
+            style={styles.imagen}
+            source={{uri: this.props.item.data.photo}}
+            />
             <Text>{this.props.item.data.description}</Text>
-            <Text>{this.props.item.data.createdAt}</Text>
+            <Text>{Math.ceil((Date.now() - this.props.item.data.createdAt)/1000/3000)} hour/hours ago</Text>
             <Text>{this.props.item.data.owner}</Text>
             <Text> Likes: {this.state.likes} </Text>
 
@@ -162,5 +167,9 @@ const styles = StyleSheet.create({
     },
     modal: {
         border: 'none',
+    },
+    imagen: {
+        height: 300,
+        width: '90%'
     }
 })

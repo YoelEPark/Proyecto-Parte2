@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import  {  Text, View, StyleSheet,  FlatList } from "react-native";
+import  {  Text, View, StyleSheet,  FlatList, Image } from "react-native";
 import Posteos from '../components/Posteos';
 import { db } from '../firebase/config';
 

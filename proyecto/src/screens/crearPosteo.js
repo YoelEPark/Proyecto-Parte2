@@ -3,7 +3,7 @@ import { Text, TextInput, TouchableOpacity, View, StyleSheet, Image} from 'react
 import { auth, db } from '../firebase/config';
 import MyCamera from '../components/MyCamera';
 
-export default class crearPosteo extends Component {
+export default class CrearPosteo extends Component {
     constructor(props){
         super(props);
         this.state = {
