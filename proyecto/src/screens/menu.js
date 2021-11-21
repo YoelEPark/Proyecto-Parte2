@@ -7,6 +7,7 @@ import MiPerfil from './MiPerfil';
 import Registro from './Registro';
 import { auth } from '../firebase/config';
 import CrearPosteo from './CrearPosteo';
+import SearchBar from './SearchBar';
 
 
 
@@ -94,7 +95,7 @@ export default class Menu extends Component {
                      <Drawer.Screen name="Mi Perfil"  >
                  {props => <MiPerfil {...props} deslogueo={()=>this.deslogueo()}/>}
                  </Drawer.Screen>
-
+                 <Drawer.Screen name = "SearchBar" component={()=> <SearchBar/> }/>
                     </>
                         :
                         <>
