@@ -77,32 +77,32 @@ quitarLikeado(){
     render(){
         console.log(this.props.item);
     return(
-        <View stlye={styles.container}>
+        <View style={styles.container}>
             <Image 
             style={styles.imagen}
             source={{uri: this.props.item.data.photo}}
             />
-            <Text>{this.props.item.data.description}</Text>
-            <Text>{Math.ceil((Date.now() - this.props.item.data.createdAt)/1000/3000)} hour/hours ago</Text>
-            <Text>{this.props.item.data.owner}</Text>
-            <Text> Likes: {this.state.likes} </Text>
+            <Text  style={styles.modalText}>{this.props.item.data.description}</Text>
+            <Text  style={styles.modalText}>{Math.ceil((Date.now() - this.props.item.data.createdAt)/1000/3000)} hour/hours ago</Text>
+            <Text  style={styles.modalText}> {this.props.item.data.owner}</Text>
+            <Text  style={styles.modalText}> Likes: {this.state.likes} </Text>
 
             {
                     !this.state.likeado ?
                     <TouchableOpacity onPress = {()=>  this.fueLikeado()}>
-                    <Text>
+                    <Text  style={styles.modalText}>
                         Like
                     </Text>
                 </TouchableOpacity>
                     :
                     <TouchableOpacity onPress = {()=> this.quitarLikeado()}>
-                        <Text>
+                        <Text  style={styles.modalText}>
                             Unlike
                         </Text>
                     </TouchableOpacity>
                 }
                  <TouchableOpacity onPress={()=>{this.showModal()}}>
-                    <Text>
+                    <Text  style={styles.modalText}>
                         Ver comentarios
                     </Text>
                 </TouchableOpacity>
@@ -118,12 +118,12 @@ quitarLikeado(){
                             <View style={styles.modalView}>
                               
                                 <TouchableOpacity style={styles.closeModal} onPress={()=>{this.closeModal()}}>
-                                        <Text style={styles.modalText} >X</Text>
+                                        <Text  >X</Text>
                                 </TouchableOpacity>
-                                <Text>
+                                <Text  style={styles.modalText}>
                                     Aquí también irán los comentarios!  
                                 </Text>
-                                <Text>
+                                <Text  style={styles.modalText}>
                                     Aquí también debe ir la posibilidad de agregar un comentario
                                 </Text>
                             </View>
@@ -138,31 +138,27 @@ quitarLikeado(){
 }
 }
 const styles = StyleSheet.create({
-    image: {
-        height: 200,
-    
-    },
-    container:{
+    container: {
         flex: 1,
-        justifyContent: 'center',
-        padding: 5,
+        alignItems: 'center',
+        backgroundColor: '#170e33'
     },
-    
     closeModal:{
         alignSelf: 'flex-end',
-        padding: 10,
+        paddingLeft: 8,
+        paddingRight: 8,
+        right: 1,
         backgroundColor: '#dc3545',
-        marginTop:2,
-        marginBotom: 10,
-        borderRadius: 4,
+        marginTop:1,
+        marginBotom: 5,
+        borderRadius: 5,
     },
 
-    modalText:{
-        fontWeight: 'bold',
-        color:'#fff',
+    modalText:{ 
+        color:'#ffffff',
     },
     modalView:{
-        backgroundColor: 'green',
+        backgroundColor: '#2b1a5e',
         borderRadius: 10,
     },
     modal: {

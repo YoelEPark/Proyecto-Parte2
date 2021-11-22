@@ -78,22 +78,23 @@ export default class CrearPosteo extends Component {
 }
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: '#170e33',
         flex: 1,
         alignItems: 'center'
     },
     field: {
         width: '80%',
-        backgroundColor: "#2DFF95",
-        color: '#FF712D',
+        backgroundColor: "#2b1a5e",
+        color: '#ffffff',
         padding: 10,
         marginVertical: 10
     },
     button: {
         width: '30%',
-        backgroundColor: "#FF712D",
+        backgroundColor: "#00acee",
     },
     text: {
-        color: '#000000',
+        color: '#ffffff',
         fontSize: 20,
         textAlign: 'center'
     },

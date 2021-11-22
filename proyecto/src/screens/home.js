@@ -30,7 +30,7 @@ export default class Home extends Component {
 }
 render(){ 
   return (
-    <View >
+    <View style={styles.container}>
             
             <FlatList
                data = {this.state.posts}
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
       backgroundColor: "#FF712D",
   },
   text: {
-      color: '#000000',
+      color: '#ffffff',
       fontSize: 20,
       textAlign: 'center'
   }

@@ -47,7 +47,7 @@ registroNuevo(){
             <Text> {this.state.campos} </Text> 
              <Text> {this.props.error} </Text>
           <TouchableOpacity style = {styles.button} onPress={() => this.registroNuevo()}>
-            <Text style={styles.text}> Sign Up  </Text>
+            <Text style={styles.sign}> Sign Up  </Text>
           </TouchableOpacity>
     </View>
   );
@@ -57,22 +57,29 @@ registroNuevo(){
   const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#170e33'
     },
     field: {
         width: '80%',
-        backgroundColor: "#2DFF95",
+        backgroundColor: "#2b1a5e",
         color: '#000000',
         padding: 10,
         marginVertical: 10
     },
     button: {
         width: '30%',
-        backgroundColor: "#FF712D",
+        backgroundColor: "#00acee",
     },
     text: {
         color: '#000000',
         fontSize: 20,
         textAlign: 'center'
-    }
+    }, 
+    sign: {
+      color: '#ffffff',
+      fontWeight: 'bold',
+      textAlign: 'center',
+      fontSize: 20,
+  }
   })

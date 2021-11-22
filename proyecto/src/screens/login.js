@@ -39,7 +39,7 @@ export default class Login extends Component {
                  <Text> {this.state.campos} </Text>
                  <Text> {this.props.falla} </Text>
                 <TouchableOpacity style = {styles.button} onPress={() => this.logueoNuevo()}>
-                    <Text style = {styles.text}> Login </Text>
+                    <Text style = {styles.sign}> Login </Text>
                 </TouchableOpacity>
             </View>
         )
@@ -47,24 +47,31 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-      flex: 1,
-      alignItems: 'center'
-  },
-  field: {
-      width: '80%',
-      backgroundColor: "#2DFF95",
-      color: '#000000',
-      padding: 10,
-      marginVertical: 10
-  },
-  button: {
-      width: '30%',
-      backgroundColor: "#FF712D",
-  },
-  text: {
-      color: '#000000',
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: '#170e33'
+    },
+    field: {
+        width: '80%',
+        backgroundColor: "#2b1a5e",
+        color: '#000000',
+        padding: 10,
+        marginVertical: 10
+    },
+    button: {
+        width: '30%',
+        backgroundColor: "#00acee",
+    },
+    text: {
+        color: '#000000',
+        fontSize: 20,
+        textAlign: 'center'
+    }, 
+    sign: {
+      color: '#ffffff',
+      fontWeight: 'bold',
+      textAlign: 'center',
       fontSize: 20,
-      textAlign: 'center'
   }
-})
+  })

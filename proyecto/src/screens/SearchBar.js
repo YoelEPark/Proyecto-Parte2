@@ -31,7 +31,7 @@ export default class SearchBar extends Component {
 
  render(){ 
     return (
-      <View >
+      <View style = {styles.container}>
           <TextInput
            style={styles.field}
            keyboardType='default'
@@ -49,27 +49,25 @@ export default class SearchBar extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center'
+        
+        backgroundColor: '#170e33'
     },
     field: {
-        width: '80%',
-        backgroundColor: "#2DFF95",
-        color: '#FF712D',
+        width: '100%',
+        backgroundColor: "#2b1a5e",
+        color: '#ffffff',
         padding: 10,
-        marginVertical: 10
+        marginVertical: 10,
+      
     },
     button: {
         width: '30%',
-        backgroundColor: "#FF712D",
+        backgroundColor: "#ffffff",
     },
     text: {
-        color: '#000000',
+        color: '#ffffff',
         fontSize: 20,
         textAlign: 'center'
     },
-    imagen: {
-        height: 300,
-        width: '90%'
-    }
+    
 })
