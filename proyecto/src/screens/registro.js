@@ -63,7 +63,7 @@ registroNuevo(){
     field: {
         width: '80%',
         backgroundColor: "#2b1a5e",
-        color: '#000000',
+        color: '#ffffff',
         padding: 10,
         marginVertical: 10
     },
@@ -72,7 +72,7 @@ registroNuevo(){
         backgroundColor: "#00acee",
     },
     text: {
-        color: '#000000',
+        color: '#ffffff',
         fontSize: 20,
         textAlign: 'center'
     }, 
