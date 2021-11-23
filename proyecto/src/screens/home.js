@@ -42,7 +42,7 @@ deletePost(param) {
 }
 render(){ 
   return (
-    <View style={styles.container}>
+    <View  >
             
             <FlatList
                data = {this.state.posts}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image, Modal } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image, Modal, FlatList , TextInput} from 'react-native'
 import { auth, db } from '../firebase/config';
 import firebase from 'firebase';
 
@@ -11,6 +11,7 @@ export default class Posteos extends Component{
                 likeado: false,  
                 likes: 0,
                 showModal: false,
+                comment: "",
             }
         }
 
@@ -28,7 +29,20 @@ export default class Posteos extends Component{
                 } } }
     }
  
-
+    onComment(){
+        const posteoActualizar = db.collection("posts").doc(this.props.item.id)
+        const comment={user: auth.currentUser.email, comment: this.state.comment, fecha: new Date()}
+        console.log(comment)
+            posteoActualizar.update({
+                comments: firebase.firestore.FieldValue.arrayUnion(comment)
+            })
+            .then(()=>{
+                this.setState({
+                    comment:"",
+                })
+            })
+        }
+    
 
 
 fueLikeado(){
@@ -73,23 +87,23 @@ quitarLikeado(){
             showModal: false,
         })
     }
-    deleteComment(deletedCommentId) {
-        let filteredComments = this.props.dataItem.data.comments.filter(
+ /*    deleteComment(deletedCommentId) {
+        let filteredComments = this.props.item.data.comments.filter(
           (element) => element.id != deletedCommentId
         );
         this.setState({
           filteredComments: filteredComments,
         });
     
-        const posteoActualizar = db.collection("posts").doc(this.props.dataItem.id);
+        const posteoActualizar = db.collection("posts").doc(this.props.item.id);
     
         posteoActualizar.update({
           comments: filteredComments,
         });
       }
       deletePost() {
-        db.collection("posts").doc(this.props.dataItem.id).delete();
-      }
+        db.collection("posts").doc(this.props.item.id).delete();
+      } */
    
     render(){
         console.log(this.props.item);
@@ -102,8 +116,8 @@ quitarLikeado(){
             <Text  style={styles.modalText}>{this.props.item.data.description}</Text>
             <Text  style={styles.modalText}>{Math.ceil((Date.now() - this.props.item.data.createdAt)/1000/3000)} hour/hours ago</Text>
             <Text  style={styles.modalText}> {this.props.item.data.owner}</Text>
-            <Text  style={styles.modalText}> Likes: {this.state.likes} </Text>
-
+            <Text  style={styles.modalText}> Likes: {this.state.likes} </Text> 
+          
             {
                     !this.state.likeado ?
                     <TouchableOpacity onPress = {()=>  this.fueLikeado()}>
@@ -137,12 +151,28 @@ quitarLikeado(){
                                 <TouchableOpacity style={styles.closeModal} onPress={()=>{this.closeModal()}}>
                                         <Text  >X</Text>
                                 </TouchableOpacity>
-                                <Text  style={styles.modalText}>
-                                    Aquí también irán los comentarios!  
-                                </Text>
-                                <Text  style={styles.modalText}>
-                                    Aquí también debe ir la posibilidad de agregar un comentario
-                                </Text>
+                                <FlatList
+                                        data={this.props.item.data.comments}
+                                        keyExtractor={(comment, id) =>  id.toString()}
+                                        renderItem={ ({item}) => <Text  style={styles.modalText}> {item.comment}  {item.user}{/*  {item.fecha} */} </Text> }  
+                                     />
+                              
+          <TextInput
+            style={styles.input}
+            keyboardType="default"
+            placeholder="Esribe un comentario..."
+            multiline={true}
+            numberOfLines={2} 
+            onChangeText={(text) => this.setState({ comment: text })}
+            value={this.state.comment}
+          />
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => this.onComment()}
+            disabled={this.state.comment == "" ? true : false}
+          >
+            <Text style={styles.textBtn}>Comentar</Text>
+          </TouchableOpacity>
                             </View>
 
                         </Modal>
@@ -160,6 +190,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#170e33'
     },
+    input: {
+        color: "grey",
+      },
     closeModal:{
         alignSelf: 'flex-end',
         paddingLeft: 8,
@@ -170,10 +203,20 @@ const styles = StyleSheet.create({
         marginBotom: 5,
         borderRadius: 5,
     },
-
+    btn: {
+        backgroundColor: "#f9ff21",
+        color: "black",
+        padding: 7,
+        marginTop: 5,
+        borderRadius: 15,
+      },
     modalText:{ 
         color:'#ffffff',
     },
+    textBtn: {
+        color: "black",
+        textAlign: "center",
+      },
     modalView:{
         backgroundColor: '#2b1a5e',
         borderRadius: 10,
@@ -184,5 +227,14 @@ const styles = StyleSheet.create({
     imagen: {
         height: 300,
         width: '90%'
-    }
+    },
+     comment: {
+        padding: "5px",
+        color: "white",
+      },
+      commentBold: {
+        padding: "5px",
+        color: "white",
+        fontWeight: "bolder",
+      },
 })
