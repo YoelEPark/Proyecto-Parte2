@@ -8,7 +8,7 @@ export default class MyCamera extends React.Component{
         super(props);
         this.camera; //Variable vacía
         this.state = {
-            photo: null,
+            photo: '',
             permission: false,
         }
     }
