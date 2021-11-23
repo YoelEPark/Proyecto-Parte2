@@ -28,6 +28,18 @@ export default class Home extends Component {
         }
     )
 }
+deletePost(param) {
+  db.collection("posts")
+    .where("createdAt", "==", param)
+    .get()
+    .then((data) => {
+      data.forEach((doc) => doc.ref.delete());
+      const postsFiltered = this.state.posts.filter(
+        (post) => post.createdAt != param
+      );
+      this.setState({ posts: postsFiltered });
+    });
+}
 render(){ 
   return (
     <View style={styles.container}>
