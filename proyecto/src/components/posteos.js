@@ -73,6 +73,23 @@ quitarLikeado(){
             showModal: false,
         })
     }
+    deleteComment(deletedCommentId) {
+        let filteredComments = this.props.dataItem.data.comments.filter(
+          (element) => element.id != deletedCommentId
+        );
+        this.setState({
+          filteredComments: filteredComments,
+        });
+    
+        const posteoActualizar = db.collection("posts").doc(this.props.dataItem.id);
+    
+        posteoActualizar.update({
+          comments: filteredComments,
+        });
+      }
+      deletePost() {
+        db.collection("posts").doc(this.props.dataItem.id).delete();
+      }
    
     render(){
         console.log(this.props.item);
