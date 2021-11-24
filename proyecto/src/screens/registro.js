@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import  {  Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { auth } from '../firebase/config';
+import  {  Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native'; 
 
 export default class Registro extends Component {
   constructor(props){

@@ -27,7 +27,9 @@ export default class CrearPosteo extends Component {
             console.log(response);
             alert("Posteo realizado!");
             this.setState({
-                comment: ""
+                comment: "",
+                photo: "" ,
+                showCamera: true
             })
             this.props.navigation.navigate('Home');
         })

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import  {  Text, TextInput, View, StyleSheet,  FlatList, Image } from "react-native";
+import  { TextInput, View, StyleSheet,  FlatList } from "react-native";
 import Posteos from '../components/Posteos';
 import { db } from '../firebase/config';
 
@@ -48,8 +48,8 @@ export default class SearchBar extends Component {
   }
 }
 const styles = StyleSheet.create({
-    container: {
-        
+    container: { 
+        flex: 1,
         backgroundColor: '#170e33'
     },
     field: {

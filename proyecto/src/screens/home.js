@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import  {  Text, View, StyleSheet,  FlatList } from "react-native";
+import  { View, StyleSheet,  FlatList } from "react-native";
 import Posteos from '../components/Posteos';
 import { db } from '../firebase/config';
 
@@ -32,7 +32,7 @@ export default class Home extends Component {
 
 render(){ 
   return (
-    <View  >
+    <View  style={styles.container}>
             
             <FlatList
                data = {this.state.posts}
@@ -40,6 +40,7 @@ render(){
               renderItem = { ({item}) => 
                     <Posteos item = {item}></Posteos> }
                 />
+                
     </View>
   );
 }
@@ -50,6 +51,11 @@ const styles = StyleSheet.create({
       width: '30%',
       backgroundColor: "#FF712D",
   },
+  container: {
+    flex: 1, 
+    backgroundColor: '#170e33',
+    
+    },
   text: {
       color: '#ffffff',
       fontSize: 20,
