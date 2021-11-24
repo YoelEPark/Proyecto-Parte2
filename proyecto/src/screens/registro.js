@@ -43,8 +43,8 @@ registroNuevo(){
           secureTextEntry={true}
           onChangeText={text => this.setState({password: text})}
           /> 
-            <Text> {this.state.campos} </Text> 
-             <Text> {this.props.error} </Text>
+            <Text style = {styles.textoDeError}> {this.state.campos} </Text> 
+             <Text style = {styles.textoDeError}> {this.props.error} </Text>
           <TouchableOpacity style = {styles.button} onPress={() => this.registroNuevo()}>
             <Text style={styles.sign}> Sign Up  </Text>
           </TouchableOpacity>
@@ -75,6 +75,10 @@ registroNuevo(){
         fontSize: 20,
         textAlign: 'center'
     }, 
+    textoDeError: {
+      fontWeight: 'bold',
+      color: '#ffffff'
+  }, 
     sign: {
       color: '#ffffff',
       fontWeight: 'bold',

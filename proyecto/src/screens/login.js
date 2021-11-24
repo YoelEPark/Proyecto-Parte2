@@ -35,8 +35,8 @@ export default class Login extends Component {
                     secureTextEntry={true}
                     onChangeText={text => this.setState({ password: text })}
                 />
-                 <Text> {this.state.campos} </Text>
-                 <Text> {this.props.falla} </Text>
+                 <Text style = {styles.textoDeError}> {this.state.campos} </Text>
+                 <Text style = {styles.textoDeError}> {this.props.falla} </Text>
                 <TouchableOpacity style = {styles.button} onPress={() => this.logueoNuevo()}>
                     <Text style = {styles.sign}> Login </Text>
                 </TouchableOpacity>
@@ -66,6 +66,10 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontSize: 20,
         textAlign: 'center'
+    }, 
+    textoDeError: {
+        fontWeight: 'bold',
+        color: '#ffffff'
     }, 
     sign: {
       color: '#ffffff',
