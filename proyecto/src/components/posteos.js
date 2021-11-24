@@ -87,28 +87,26 @@ quitarLikeado(){
             showModal: false,
         })
     }
- deleteComment(deletedCommentId) {
-    let filteredComments = this.props.dataItem.data.comments.filter(
-      (element) => element.id != deletedCommentId
-    );
-    this.setState({
-      filteredComments: filteredComments,
-    });
 
-    const posteoActualizar = db.collection("posts").doc(this.props.dataItem.id);
+    quitarComentario(){
+        let confirmDelete = confirm("seguro queres borrar el comentario?")
+        
+        const posteoActualizar = db.collection('posts').doc(this.props.item.id).delete();
+        
+        posteoActualizar.update({
+            comment: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+        })
+        .then(()=> {
+            this.setState({
+                comment: false,
+                comment: this.state.comment 
 
-    posteoActualizar.update({
-      comments: filteredComments,
-    });
-  }
-
-  deletePost() {
-    let confirmDelete = confirm("¿Estás seguro de que querés eliminar esta publicación?")
-    
-    if (confirmDelete){
-      db.collection("posts").doc(this.props.dataItem.id).delete();
+                
+            })
+        })
     }
-  }
+        
+
    
     render(){
         console.log(this.props.item);
@@ -174,26 +172,19 @@ quitarLikeado(){
           <TouchableOpacity
             style={styles.btn}
             onPress={() => this.onComment()}
-            disabled={this.state.comment == "" ? true : false}
-          >
+            disabled={this.state.comment == "" ? true : false}>
             <Text style={styles.textBtn}>Comentar</Text>
           </TouchableOpacity>
-                            </View>
-                            <TouchableOpacity
-                      style={styles.closeModal}
-                      onPress={() => {
-                        this.props.deleteComment(item.id);
-                      }}
-                    >
-                      
+          <TouchableOpacity onPress = {()=> this.quitarComentario()}>
+                        <Text  style={styles.modalText}>
+                            Borrar comentario
+                        </Text>
                     </TouchableOpacity>
-
-                        </Modal>
-                        :
-                        null
-                }
+    </View>
+         </Modal>
+         :null}
             
-        </View>
+    </View>
     )
 }
 }
