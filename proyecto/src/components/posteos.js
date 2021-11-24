@@ -87,23 +87,28 @@ quitarLikeado(){
             showModal: false,
         })
     }
- /*    deleteComment(deletedCommentId) {
-        let filteredComments = this.props.item.data.comments.filter(
-          (element) => element.id != deletedCommentId
-        );
-        this.setState({
-          filteredComments: filteredComments,
-        });
+ deleteComment(deletedCommentId) {
+    let filteredComments = this.props.dataItem.data.comments.filter(
+      (element) => element.id != deletedCommentId
+    );
+    this.setState({
+      filteredComments: filteredComments,
+    });
+
+    const posteoActualizar = db.collection("posts").doc(this.props.dataItem.id);
+
+    posteoActualizar.update({
+      comments: filteredComments,
+    });
+  }
+
+  deletePost() {
+    let confirmDelete = confirm("¿Estás seguro de que querés eliminar esta publicación?")
     
-        const posteoActualizar = db.collection("posts").doc(this.props.item.id);
-    
-        posteoActualizar.update({
-          comments: filteredComments,
-        });
-      }
-      deletePost() {
-        db.collection("posts").doc(this.props.item.id).delete();
-      } */
+    if (confirmDelete){
+      db.collection("posts").doc(this.props.dataItem.id).delete();
+    }
+  }
    
     render(){
         console.log(this.props.item);
@@ -174,6 +179,14 @@ quitarLikeado(){
             <Text style={styles.textBtn}>Comentar</Text>
           </TouchableOpacity>
                             </View>
+                            <TouchableOpacity
+                      style={styles.closeModal}
+                      onPress={() => {
+                        this.props.deleteComment(item.id);
+                      }}
+                    >
+                      
+                    </TouchableOpacity>
 
                         </Modal>
                         :
