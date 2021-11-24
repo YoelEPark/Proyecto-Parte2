@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import  {  Text, View, StyleSheet,  FlatList, Image, TouchableOpacity } from "react-native";
 import { auth, db } from "../firebase/config";
 import Posteos from "../components/Posteos";
+import { styles } from "../components/MyCamera";
 
 export default class MiPerfil extends Component {
   constructor(props) {
@@ -39,37 +40,43 @@ export default class MiPerfil extends Component {
     } 
 
   render() {
-    console.log(this.posts);
+    console.log(this.state.posts);
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>Usuario: {auth.currentUser.displayName}</Text>
-        <Text style={styles.text}>E-mail: {auth.currentUser.email}</Text>
-        <Text style={styles.text}>
+      <View style={me.container}>
+        <Text style={me.text}>Usuario: {auth.currentUser.displayName}</Text>
+        <Text style={me.text}>E-mail: {auth.currentUser.email}</Text>
+        <Text style={me.text}>
           Última fecha de ingreso: {auth.currentUser.metadata.lastSignInTime}
         </Text>
-        <Text  style={styles.text}>Publicaciones: {this.state.posts.length}</Text> 
+        <Text  style={me.text}>Publicaciones: {this.state.posts.length}</Text> 
         <TouchableOpacity
-          style={styles.button}
+          style={me.button}
           onPress={() => this.props.deslogueo()}
         >
-          <Text style={styles.sign}> Cerrar sesión </Text>
+          <Text style={me.sign}> Cerrar sesión </Text>
         </TouchableOpacity>
         <FlatList
           data={this.state.posts}
           keyExtractor={(posts) => posts.id.toString()}
-          renderItem = { ({item}) => {return <Posteos item = {item}></Posteos> }  }
+          renderItem = { ({item}) => <View style={me.container}>
+            <Image source= {item.data.photo} style= {me.imagen}/>
+            <Text style={me.text}> Descripcion: {item.data.description} </Text>
+            <Text  style={me.text}> Likes: {item.data.likes.length} </Text> 
+            <TouchableOpacity
+          style={me.button}
+          onPress={() => this.borrarPosteo(item)} >
+          <Text style= {me.sign}> Borrar Posteo </Text>
+        </TouchableOpacity>
+        </View>
+              }
         />
-        <TouchableOpacity onPress={()=>{this.borrarPosteo(posts)}}>
-                    <Text  style={styles.sign}>
-                       borrar
-                    </Text>
-                </TouchableOpacity>
+      
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({ 
+const me = StyleSheet.create({ 
   button: {
     width: '30%',
     marginLeft: '35%',
@@ -89,5 +96,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 15,
+},
+imagen: {
+  height: 300,
+  width: '90%'
 }
 })
