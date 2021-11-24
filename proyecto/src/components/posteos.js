@@ -88,26 +88,10 @@ quitarLikeado(){
         })
     }
 
-    quitarComentario(){
-        let confirmDelete = confirm("seguro queres borrar el comentario?")
-        
-        const posteoActualizar = db.collection('posts').doc(this.props.item.id).delete();
-        
-        posteoActualizar.update({
-            comment: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
-        })
-        .then(()=> {
-            this.setState({
-                comment: false,
-                comment: this.state.comment 
-
-                
-            })
-        })
-    }
-        
-
    
+    
+
+
     render(){
         console.log(this.props.item);
     return(
@@ -175,11 +159,7 @@ quitarLikeado(){
             disabled={this.state.comment == "" ? true : false}>
             <Text style={styles.textBtn}>Comentar</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress = {()=> this.quitarComentario()}>
-                        <Text  style={styles.modalText}>
-                            Borrar comentario
-                        </Text>
-                    </TouchableOpacity>
+      
     </View>
          </Modal>
          :null}

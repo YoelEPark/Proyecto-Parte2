@@ -29,8 +29,17 @@ export default class MiPerfil extends Component {
       )
   } 
  
+  borrarPosteo(posts){
+    db.collection('posts').doc(posts.id).delete()
+    .then(() => {
+            console.log("Document successfully deleted!");
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    } 
 
   render() {
+    console.log(this.posts);
     return (
       <View style={styles.container}>
         <Text style={styles.text}>Usuario: {auth.currentUser.displayName}</Text>
@@ -50,6 +59,11 @@ export default class MiPerfil extends Component {
           keyExtractor={(posts) => posts.id.toString()}
           renderItem = { ({item}) => {return <Posteos item = {item}></Posteos> }  }
         />
+        <TouchableOpacity onPress={()=>{this.borrarPosteo(posts)}}>
+                    <Text  style={styles.sign}>
+                       borrar
+                    </Text>
+                </TouchableOpacity>
       </View>
     )
   }
