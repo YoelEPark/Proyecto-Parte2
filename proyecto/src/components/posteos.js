@@ -139,12 +139,17 @@ export default class Posteos extends Component{
                                 <TouchableOpacity style={styles.closeModal} onPress={()=>{this.closeModal()}}>
                                         <Text>X</Text>
                                 </TouchableOpacity>
+                                
+                                {
+                                this.props.item.data.comments.length !== 0 ?
                                 <FlatList
                                         data={this.props.item.data.comments}
                                         keyExtractor={(comment, id) =>  id.toString()}
                                         renderItem={ ({item}) => <Text  style={styles.texto}> Usuario: "{item.user}" comento lo siguiente: {item.comment}   </Text> }  
                                      />
-                              
+                                     :
+                                     <Text  style={styles.texto}> Aún no hay comentarios. Sé el primero en opinar </Text>
+                             }
                                  <TextInput
                                       style={styles.input}
                                       keyboardType="default"
@@ -160,7 +165,7 @@ export default class Posteos extends Component{
                                       disabled={this.state.comment == "" ? true : false}>
                                      <Text style={styles.textBtn}>Comentar</Text>
                                  </TouchableOpacity>
-      
+                            
                             </View>
                           </Modal>
                         :null}
